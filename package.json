@@ -1,0 +1,36 @@
+{
+  "name": "MiteRevenueReport",
+  "version": "1.0.0",
+  "description": "A Slack slash command that reports the current revenue based on the mite time tracking tool.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creativepragmatics/mite-revenue-slack"
+  },
+  "keywords": [
+    "slack",
+    "slash command",
+    "mite",
+    "revenue"
+  ],
+  "author": "Creative Pragmatics",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/creativepragmatics/mite-revenue-slack/issues"
+  },
+  "homepage": "https://github.com/creativepragmatics/mite-revenue-slack",
+  "engines": {
+    "node": "5.1.1"
+  },
+  "dependencies": {
+    "botkit": "0.2.2",
+    "botkit-storage-mongo": "1.0.2",
+    "mongodb": "2.2.0",
+    "mite-api": "0.1.0",
+    "underscore": "1.8.3"
+  }
+}
