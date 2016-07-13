@@ -200,20 +200,18 @@ controller.on('slash_command', function (slashCommand, message) {
           report += "Last Month: *EUR " + monthly + "K*\n"
           report += "Last Week: *EUR " + weekly + "K*"
 
+          if (shouldDisplayFeedback()) {
+            report += "\n\n"
+            report += getFeedback(yearly)
+          }
+
           var result = {
             "text": report,
             "username": "MiteRevenueReport4Slack",
             "mrkdwn": true
           }
 
-          slashCommand.replyPublic(message, result, function() {
-            if (shouldDisplayFeedback()) {
-              setTimeout(function() {
-                var feedback = getFeedback(yearly)
-                slashCommand.replyPublicDelayed(message, feedback)
-              }, (Math.floor(Math.random() * 3) + 1) * 1000 )
-            }
-          })
+          slashCommand.replyPublic(message, result)
         }
       );
 
