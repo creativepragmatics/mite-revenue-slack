@@ -188,32 +188,40 @@ controller.on('slash_command', function (slashCommand, message) {
 
     if (message.text == "") {
 
-      getFinancialMetrics(
-        function(projection_per_year, projection_per_last_4_weeks, projection_per_last_7_days, rev_this_year) {
-          yearly = Math.round(projection_per_year / 1000)
-          monthly = Math.round(projection_per_last_4_weeks / 1000)
-          weekly = Math.round(projection_per_last_7_days / 1000)
+      var immediate = {
+        "text": "Please hold the line, while I do some magic!",
+        "username": "MiteRevenueReport4Slack",
+        "mrkdwn": true
+      }
 
-          report =  "Revenue: *EUR " + rev_this_year + "*"
-          report += "\n\n_Projection_\n"
-          report += "Year: *EUR " + yearly + "K*\n"
-          report += "Last Month: *EUR " + monthly + "K*\n"
-          report += "Last Week: *EUR " + weekly + "K*"
+      slashCommand.replyPublic(message, immediate, function() {
+        getFinancialMetrics(
+          function(projection_per_year, projection_per_last_4_weeks, projection_per_last_7_days, rev_this_year) {
+            yearly = Math.round(projection_per_year / 1000)
+            monthly = Math.round(projection_per_last_4_weeks / 1000)
+            weekly = Math.round(projection_per_last_7_days / 1000)
 
-          if (shouldDisplayFeedback()) {
-            report += "\n\n"
-            report += getFeedback(yearly)
+            report =  "Revenue: *EUR " + rev_this_year + "*"
+            report += "\n\n_Projection_:\n"
+            report += "This year: *EUR " + yearly + "K*\n"
+            report += "Last 4 weeks: *EUR " + monthly + "K*\n"
+            report += "Last week: *EUR " + weekly + "K*"
+
+            if (shouldDisplayFeedback()) {
+              report += "\n\n"
+              report += getFeedback(yearly)
+            }
+
+            var result = {
+              "text": report,
+              "username": "MiteRevenueReport4Slack",
+              "mrkdwn": true
+            }
+
+            slashCommand.replyPublicDelayed(message, result)
           }
-
-          var result = {
-            "text": report,
-            "username": "MiteRevenueReport4Slack",
-            "mrkdwn": true
-          }
-
-          slashCommand.replyPublic(message, result)
-        }
-      );
+        );
+      })
 
     }
 
