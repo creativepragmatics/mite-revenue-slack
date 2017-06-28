@@ -31,6 +31,8 @@ var goodJobArray = [
   "You rock!",
   "Can you spend all this money?",
   "http://giphy.com/gifs/homer-simpson-the-simpsons-season-6-DTywu7YYjWCVW",
+  "https://media3.giphy.com/media/l3UcA1HpL5kLuiWOc/giphy.gif",
+  "http://media3.giphy.com/media/plrhd7RveGGZy/giphy.gif"
 ]
 
 var okButCanBeBetterArray = [
